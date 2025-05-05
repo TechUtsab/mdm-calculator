@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Firebase Input App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 0 15px;
+    }
+    h2 {
+      color: #333;
+    }
+    input[type="text"] {
+      padding: 8px;
+      width: 70%;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      padding: 8px 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 8px;
+      border-bottom: 1px solid #eee;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter Data</h2>
+  <input type="text" id="myInput" placeholder="Enter something..." />
+  <button onclick="sendData()">Submit</button>
+
+  <h2>Submitted Data</h2>
+  <ul id="dataList"></ul>
+
+  <!-- Firebase SDK (Modular) -->
+  <script type="module">
+    // Import Firebase libraries
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+    // Firebase configuration (REPLACE WITH YOUR OWN CONFIG)
+    // Go to Firebase Console > Project Settings > General > Your Apps > Web App
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Function to send data to Firebase
+    window.sendData = function() {
+      const inputData = document.getElementById("myInput").value;
+      if (inputData.trim() !== "") {
+        const inputsRef = ref(database, 'inputs');
+        push(inputsRef, {
+          data: inputData,
+          timestamp: Date.now()
+        }).then(() => {
+          document.getElementById("myInput").value = ""; // Clear input field
+        }).catch((error) => {
+          alert("Error saving data: " + error.message);
+        });
+      } else {
+        alert("Please enter some data.");
+      }
+    };
+
+    // Real-time data display from Firebase
+    const inputsRef = ref(database, 'inputs');
+    onValue(inputsRef, (snapshot) => {
+      const dataList = document.getElementById("dataList");
+      dataList.innerHTML = ""; // Clear previous data
+
+      snapshot.forEach((childSnapshot) => {
+        const item = childSnapshot.val().data;
+        const li = document.createElement("li");
+        li.textContent = item;
+        dataList.appendChild(li);
+      });
+    }, (error) => {
+      alert("Error fetching data: " + error.message);
+    });
+
+    // SECURITY NOTE: Ensure Firebase Realtime Database rules are configured to prevent unauthorized access.
+    // Example rules in Firebase Console:
+    // {
+    //   "rules": {
+    //     "inputs": {
+    //       ".read": "auth != null",
+    //       ".write": "auth != null"
+    //     }
+    //   }
+    // }
+  </script>
+</body>
+</html>
