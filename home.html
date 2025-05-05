@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDM Pro Calculator App</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    .navbar-dark.bg-custom {
+      background-color: #740000;
+    }
+
+    .jumbotron {
+      background-color: #FFFFFF;
+    }
+
+    .jumbotron h3,
+    .jumbotron p {
+      color: #740000;
+    }
+
+    .btn-primary {
+      background-color: #740000;
+      border-color: #740000;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #740000;
+      margin-top: 320px;
+      color: #fff;
+    }
+
+    .field-spacing {
+      padding-right: 50px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
+    <a class="navbar-brand" href="#">&#171; HOME</a>
+  </nav>
+
+  <div class="container">
+    <div class="text-center"><br>
+      <h3> मध्याह्न भोजन व्यय विवरण </h3>
+      <h4>Class I-V</h4>
+    </div>
+    <br>
+    <table>
+      <tr>
+        <td class="field-spacing">
+          <div>
+            <b>
+              <p>छात्रों की कुल संख्या: <span id="total1"></span></p>
+            </b>
+          </div>
+        </td>
+        <td>
+          <div>
+            <b>
+              <p>निर्धारित दर: <span id="dar"></span></p>
+            </b>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <div class="input-group mb-3">
+      <input type="text" id="item1" class="form-control" placeholder="Enter Data...">
+      <div class="input-group-append">
+        <button onclick="calculate()" class="btn btn-primary">Calculate</button>
+      </div>
+    </div>
+
+    <h4>Food Consumption:</h4>
+    <table id="consumption-table" class="table">
+      <thead>
+        <tr>
+          <th>सामान</th>
+          <th>मात्रा (Kg)</th>
+          <th>राशि</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; Dcs Technology. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Firebase and App Logic -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAV5iLBDOc703K-r5rwrLGAQ2srlRVRV7g",
+      authDomain: "mdm-calculator-9fdc2.firebaseapp.com",
+      projectId: "mdm-calculator-9fdc2",
+      storageBucket: "mdm-calculator-9fdc2.appspot.com",
+      messagingSenderId: "441316274099",
+      appId: "1:441316274099:web:caa9dcbc8ddcdd60d365c6",
+      measurementId: "G-16VZY5132N",
+      databaseURL: "https://mdm-calculator-9fdc2-default-rtdb.firebaseio.com"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    let data = {};
+    let data1 = {};
+
+    db.ref("admin1").on("value", (snapshot) => {
+      const val = snapshot.val();
+      if (val) {
+        data = val.fieldEven || {};
+        data1 = val.fieldOdd || {};
+
+        const dar = parseFloat(data.field2) + parseFloat(data.field4) + parseFloat(data.field6) + parseFloat(data.field8) + parseFloat(data.field10) + parseFloat(data.field12);
+        document.getElementById("dar").textContent = dar.toFixed(2);
+      }
+    });
+
+    function calculate() {
+      const item1Quantity = parseInt(document.getElementById("item1").value);
+      const total1 = item1Quantity;
+
+      const frice = (total1 * parseFloat(data.field2)).toFixed(2);
+      const fdaal = (total1 * parseFloat(data.field4)).toFixed(2);
+      const fsabji = (total1 * parseFloat(data.field6)).toFixed(2);
+      const ftel = (total1 * parseFloat(data.field8)).toFixed(2);
+      const fmasala = (total1 * parseFloat(data.field10)).toFixed(2);
+      const fjalawan = (total1 * parseFloat(data.field12)).toFixed(2);
+      const total = (parseFloat(frice) + parseFloat(fdaal) + parseFloat(fsabji) + parseFloat(ftel) + parseFloat(fmasala) + parseFloat(fjalawan)).toFixed(2);
+
+      const frice1 = ((total1 * parseFloat(data1.field1)) / 1000).toFixed(2);
+      const fdaal1 = ((total1 * parseFloat(data1.field3)) / 1000).toFixed(2);
+      const fsabji1 = ((total1 * parseFloat(data1.field5)) / 1000).toFixed(2);
+      const ftel1 = ((total1 * parseFloat(data1.field7)) / 1000).toFixed(2);
+      const fmasala1 = ((total1 * parseFloat(data1.field9)) / 1000).toFixed(2);
+      const fjalawan1 = ((total1 * parseFloat(data1.field11)) / 1000).toFixed(2);
+
+      const tableBody = document.getElementById("consumption-table").getElementsByTagName('tbody')[0];
+      tableBody.innerHTML = `
+        <tr><td>चावल</td><td>${frice1}</td><td>${frice}</td></tr>
+        <tr><td>दाल</td><td>${fdaal1}</td><td>${fdaal}</td></tr>
+        <tr><td>सब्जी</td><td>${fsabji1}</td><td>${fsabji}</td></tr>
+        <tr><td>तेल</td><td>${ftel1}</td><td>${ftel}</td></tr>
+        <tr><td>मसाला/नमक</td><td>${fmasala1}</td><td>${fmasala}</td></tr>
+        <tr><td>जलावन</td><td>${fjalawan1}</td><td>${fjalawan}</td></tr>
+        <tr><td></td><td><b>कुल</b></td><td><b>${total}</b></td></tr>`;
+
+      document.getElementById("total1").textContent = total1;
+    }
+  </script>
+</body>
+
+</html>

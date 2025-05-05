@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MDM Pro Calculator App</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"></script>
+  <script type="module" src="https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js"></script>
+  <style>
+    body {
+      padding-top: 50px;
+    }
+
+    .jumbotron {
+      text-align: center;
+      background-color: #FFFFFF;
+    }
+
+    .jumbotron h3,
+    .jumbotron p {
+      color: #740000;
+    }
+
+    .btn-primary {
+      background-color: #740000;
+      border-color: #740000;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: #5c0000;
+      border-color: #5c0000;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 5px;
+      background-color: #740000;
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    .navbar-dark.bg-custom {
+      background-color: #740000;
+    }
+
+    .table td,
+    .table th {
+      padding: 0.5rem;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    #message {
+      display: none;
+      color: green;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
+    <a class="navbar-brand" href="#">&#171; HOME</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h3 class="display-6"><b>मध्याहन भोजन योजना, बिहार पटना परिवर्तन मूल्य की नई दर की विवरणी... </b></h3>
+      <p class="lead"><b>Class I-V & VI-VIII</b></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="message">Data updated successfully.</div>
+
+    <form onsubmit="event.preventDefault(); updateData();">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>सामग्री</th>
+            <th>वजन प्रति छात्र</th>
+            <th>दर प्रति किलो</th>
+            <th>मूल्य प्रति छात्र</th>
+          </tr>
+        </thead>
+        <tbody id="formFields">
+          <!-- Dynamically inserted rows -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td>कुल</td>
+            <td id="totalCell">0</td>
+          </tr>
+        </tfoot>
+      </table>
+      <button type="submit" class="btn btn-primary">Update Record</button>
+    </form>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; Dcs Technology. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Firebase & JS -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAV5iLBDOc703K-r5rwrLGAQ2srlRVRV7g",
+      authDomain: "mdm-calculator-9fdc2.firebaseapp.com",
+      databaseURL: "https://mdm-calculator-9fdc2-default-rtdb.firebaseio.com",
+      projectId: "mdm-calculator-9fdc2",
+      storageBucket: "mdm-calculator-9fdc2.appspot.com",
+      messagingSenderId: "441316274099",
+      appId: "1:441316274099:web:caa9dcbc8ddcdd60d365c6",
+      measurementId: "G-16VZY5132N"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const dataRef = ref(db, "admin1");
+
+    const items = [
+      "चावल", "दाल", "सब्जी", "तेल", "मसाला/नमक", "जलावन"
+    ];
+
+    const tbody = document.getElementById("formFields");
+
+    function renderTable(data = {}) {
+      tbody.innerHTML = "";
+      for (let i = 0; i < 6; i++) {
+        const row = document.createElement("tr");
+        const baseIndex = i * 2 + 1;
+
+        row.innerHTML = `
+          <td>${items[i]}</td>
+          <td><input type="text" class="form-control" id="field${baseIndex}" value="${data["field" + baseIndex] || ""}"></td>
+          <td><input type="text" class="form-control" id="field${13 + i}" value="${data["field" + (13 + i)] || ""}"></td>
+          <td><input type="text" class="form-control" id="field${baseIndex + 1}" value="${data["field" + (baseIndex + 1)] || ""}"></td>
+        `;
+        tbody.appendChild(row);
+      }
+
+      updateTotal(data);
+    }
+
+    function updateTotal(data) {
+      const total =
+        Number(data.field2 || 0) +
+        Number(data.field4 || 0) +
+        Number(data.field6 || 0) +
+        Number(data.field8 || 0) +
+        Number(data.field10 || 0) +
+        Number(data.field12 || 0);
+      document.getElementById("totalCell").textContent = total.toFixed(2);
+    }
+
+    window.updateData = async function () {
+      const fields = {};
+      for (let i = 1; i <= 18; i++) {
+        fields["field" + i] = document.getElementById("field" + i).value;
+      }
+
+      try {
+        await set(dataRef, fields);
+        document.getElementById("message").style.display = "block";
+        updateTotal(fields);
+      } catch (err) {
+        alert("Error updating data: " + err.message);
+      }
+    };
+
+    async function fetchData() {
+      const snap = await get(dataRef);
+      if (snap.exists()) {
+        renderTable(snap.val());
+      } else {
+        renderTable();
+      }
+    }
+
+    fetchData();
+  </script>
+</body>
+
+</html>

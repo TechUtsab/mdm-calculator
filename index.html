@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MDM Pro Calculator App</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./removeBanner.js">
+    <style>
+        body {
+            padding-top: 50px; /* Reduced space to 20px */
+        }
+
+        .jumbotron {
+        
+    		padding: 0rem 1rem;
+    		margin-bottom: 2rem;
+            text-align: center;
+            background-color: #FFFFFF;
+        }
+
+        .jumbotron h3,
+        .jumbotron p {
+            color: #740000;
+        }
+
+        .btn-wide {
+            width: 100%;
+            text-decoration: none;
+        }
+
+        .navbar-dark .navbar-brand,
+        .navbar-dark .navbar-nav .nav-link {
+            color: #fff;
+        }
+
+        .navbar-dark.bg-custom {
+            background-color: #740000;
+        }
+
+        .navbar-dark.bg-custom .navbar-nav .nav-link:hover,
+        .navbar-dark.bg-custom .navbar-nav .nav-link:focus {
+            color: #740000;
+            background-color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #740000;
+            border-color: #740000;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: #740000;
+            border-color: #740000;
+        }
+
+        .footer {
+            background-color: #740000;
+            padding: 5px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: #fff;
+        }
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logo img {
+            max-width: 200px;
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
+        <a class="navbar-brand" href="index.php">MDM Pro Calculator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin.php">Administrator</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Help</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<br><br><br>
+    <div class="jumbotron jumbotron-fluid text-center">
+    <div class="logo mb-4">
+        <img src="logo.jpg" alt="Logo" class="img-fluid" style="max-width: 150px;">
+    </div>
+    <div class="container">
+        <h2 class="display-6 font-weight-bold">मध्याहन भोजन योजना, पटना, बिहार</h2>
+        <h4 class="display-6 font-weight-bold">Mid Day Meal Scheme</h4>
+        <p class="lead font-weight-bold">Class I-V & VI-VIII</p>
+    </div>
+</div>
+
+<!-- Login Form -->
+<div class="container login-container">
+    <div class="row">
+        <!-- Button for Class I-V -->
+        <div class="col-6 mb-4">
+            <a href="index.php" class="btn btn-primary btn-lg w-100">Class I-V</a>
+        </div>
+        <!-- Button for Class VI-VIII -->
+        <div class="col-6 mb-4">
+            <a href="index.php" class="btn btn-primary btn-lg w-100">Class VI-VIII</a>
+        </div>
+    </div>
+</div>
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; Dcs Technology. All Rights Reserved.</p>
+        </div>
+    </footer>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
