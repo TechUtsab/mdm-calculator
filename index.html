@@ -53,19 +53,19 @@
   <!-- Firebase SDK (Modular) -->
   <script type="module">
     // Import Firebase libraries
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js";
 
-    // Firebase configuration (REPLACE WITH YOUR OWN CONFIG)
-    // Go to Firebase Console > Project Settings > General > Your Apps > Web App
+    // Your web app's Firebase configuration
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      databaseURL: "https://YOUR_PROJECT_ID.firebaseio.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyAV5iLBDOc703K-r5rwrLGAQ2srlRVRV7g",
+      authDomain: "mdm-calculator-9fdc2.firebaseapp.com",
+      projectId: "mdm-calculator-9fdc2",
+      storageBucket: "mdm-calculator-9fdc2.firebasestorage.app",
+      messagingSenderId: "441316274099",
+      appId: "1:441316274099:web:caa9dcbc8ddcdd60d365c6",
+      measurementId: "G-16VZY5132N",
+      databaseURL: "https://mdm-calculator-9fdc2-default-rtdb.firebaseio.com"
     };
 
     // Initialize Firebase
@@ -107,7 +107,7 @@
     });
 
     // SECURITY NOTE: Ensure Firebase Realtime Database rules are configured to prevent unauthorized access.
-    // Example rules in Firebase Console:
+    // Go to Firebase Console > Realtime Database > Rules, and set appropriate rules, e.g.:
     // {
     //   "rules": {
     //     "inputs": {
