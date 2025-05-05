@@ -40,12 +40,26 @@
     .field-spacing {
       padding-right: 50px;
     }
+    
+    #loading-message {
+      color: #740000;
+      font-weight: bold;
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    #error-message {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      margin: 20px 0;
+    }
   </style>
 </head>
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-    <a class="navbar-brand" href="#">&#171; HOME</a>
+    <a class="navbar-brand" href="#">« HOME</a>
   </nav>
 
   <div class="container">
@@ -59,22 +73,25 @@
         <td class="field-spacing">
           <div>
             <b>
-              <p>छात्रों की कुल संख्या: <span id="total1"></span></p>
+              <p>छात्रों की कुल संख्या: <span id="total1">0</span></p>
             </b>
           </div>
         </td>
         <td>
           <div>
             <b>
-              <p>निर्धारित दर: <span id="dar"></span></p>
+              <p>निर्धारित दर: <span id="dar">0.00</span></p>
             </b>
           </div>
         </td>
       </tr>
     </table>
 
+    <div id="loading-message">Loading data from server...</div>
+    <div id="error-message" style="display: none;"></div>
+
     <div class="input-group mb-3">
-      <input type="text" id="item1" class="form-control" placeholder="Enter Data...">
+      <input type="number" id="item1" class="form-control" placeholder="Enter number of students...">
       <div class="input-group-append">
         <button onclick="calculate()" class="btn btn-primary">Calculate</button>
       </div>
@@ -89,18 +106,21 @@
           <th>राशि</th>
         </tr>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        <tr><td colspan="3" class="text-center">Enter number of students and click Calculate</td></tr>
+      </tbody>
     </table>
   </div>
 
   <footer class="footer">
-    <p>&copy; Dcs Technology. All Rights Reserved.</p>
+    <p>© Dcs Technology. All Rights Reserved.</p>
   </footer>
 
   <!-- Firebase and App Logic -->
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
   <script>
+    // Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAV5iLBDOc703K-r5rwrLGAQ2srlRVRV7g",
       authDomain: "mdm-calculator-9fdc2.firebaseapp.com",
@@ -112,42 +132,142 @@
       databaseURL: "https://mdm-calculator-9fdc2-default-rtdb.firebaseio.com"
     };
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.database();
+    // Initialize Firebase
+    let db;
+    try {
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.database();
+      console.log("Firebase initialized successfully");
+    } catch (error) {
+      console.error("Firebase initialization failed:", error);
+      showError("Failed to connect to database. Please refresh the page.");
+    }
 
-    let data = {};
-    let data1 = {};
-
-    db.ref("admin1").on("value", (snapshot) => {
-      const val = snapshot.val();
-      if (val) {
-        data = val.fieldEven || {};
-        data1 = val.fieldOdd || {};
-
-        const dar = parseFloat(data.field2) + parseFloat(data.field4) + parseFloat(data.field6) + parseFloat(data.field8) + parseFloat(data.field10) + parseFloat(data.field12);
-        document.getElementById("dar").textContent = dar.toFixed(2);
+    // Default values in case Firebase fails
+    const defaultData = {
+      fieldEven: {
+        field2: 4.62,  // Rice rate
+        field4: 2.31,  // Dal rate
+        field6: 1.54,  // Sabji rate
+        field8: 0.77,  // Tel rate
+        field10: 0.31, // Masala rate
+        field12: 0.77  // Jalawan rate
+      },
+      fieldOdd: {
+        field1: 100,   // Rice quantity (grams per student)
+        field3: 30,    // Dal quantity
+        field5: 75,    // Sabji quantity
+        field7: 7.5,   // Tel quantity
+        field9: 7.5,   // Masala quantity
+        field11: 50    // Jalawan quantity (grams)
       }
-    });
+    };
+
+    let data = {...defaultData.fieldEven};
+    let data1 = {...defaultData.fieldOdd};
+    let dataLoaded = false;
+
+    // Try to load data from Firebase
+    if (db) {
+      db.ref("admin1").once("value")
+        .then((snapshot) => {
+          const val = snapshot.val();
+          document.getElementById("loading-message").style.display = "none";
+          
+          if (val) {
+            console.log("Data loaded from Firebase:", val);
+            
+            // Handle different possible data structures
+            if (val.fieldEven && val.fieldOdd) {
+              data = val.fieldEven;
+              data1 = val.fieldOdd;
+            } else if (val.fields) {
+              // Alternative structure if fields are direct children
+              data = val.fields.even || defaultData.fieldEven;
+              data1 = val.fields.odd || defaultData.fieldOdd;
+            } else {
+              // If data structure is completely different
+              console.warn("Unexpected data structure, using default values");
+              showError("Data format unexpected. Using default values.");
+            }
+            
+            dataLoaded = true;
+            updateRateDisplay();
+          } else {
+            console.warn("No data found at 'admin1', using default values");
+            showError("No data found. Using default values.");
+          }
+        })
+        .catch((error) => {
+          console.error("Firebase error:", error);
+          document.getElementById("loading-message").style.display = "none";
+          showError("Failed to load data. Using default values.");
+        });
+    } else {
+      document.getElementById("loading-message").style.display = "none";
+      showError("Database not connected. Using default values.");
+    }
+
+    function showError(message) {
+      const errorEl = document.getElementById("error-message");
+      errorEl.textContent = message;
+      errorEl.style.display = "block";
+      setTimeout(() => errorEl.style.display = "none", 5000);
+    }
+
+    function updateRateDisplay() {
+      const fields = ['field2', 'field4', 'field6', 'field8', 'field10', 'field12'];
+      let dar = 0;
+      for (const field of fields) {
+        dar += parseFloat(data[field] || 0);
+      }
+      document.getElementById("dar").textContent = dar.toFixed(2);
+    }
 
     function calculate() {
-      const item1Quantity = parseInt(document.getElementById("item1").value);
+      const item1Input = document.getElementById("item1").value;
+      const item1Quantity = parseInt(item1Input);
+
+      // Validate input
+      if (isNaN(item1Quantity) || item1Quantity <= 0) {
+        showError("Please enter a valid number of students.");
+        return;
+      }
+
       const total1 = item1Quantity;
+      
+      // Helper function to safely get values
+      const getValue = (obj, field, defaultValue = 0) => {
+        const val = parseFloat(obj[field]);
+        return isNaN(val) ? defaultValue : val;
+      };
 
-      const frice = (total1 * parseFloat(data.field2)).toFixed(2);
-      const fdaal = (total1 * parseFloat(data.field4)).toFixed(2);
-      const fsabji = (total1 * parseFloat(data.field6)).toFixed(2);
-      const ftel = (total1 * parseFloat(data.field8)).toFixed(2);
-      const fmasala = (total1 * parseFloat(data.field10)).toFixed(2);
-      const fjalawan = (total1 * parseFloat(data.field12)).toFixed(2);
-      const total = (parseFloat(frice) + parseFloat(fdaal) + parseFloat(fsabji) + parseFloat(ftel) + parseFloat(fmasala) + parseFloat(fjalawan)).toFixed(2);
+      // Calculate amounts
+      const frice = (total1 * getValue(data, 'field2')).toFixed(2);
+      const fdaal = (total1 * getValue(data, 'field4')).toFixed(2);
+      const fsabji = (total1 * getValue(data, 'field6')).toFixed(2);
+      const ftel = (total1 * getValue(data, 'field8')).toFixed(2);
+      const fmasala = (total1 * getValue(data, 'field10')).toFixed(2);
+      const fjalawan = (total1 * getValue(data, 'field12')).toFixed(2);
+      
+      // Calculate quantities (convert grams to kg)
+      const frice1 = ((total1 * getValue(data1, 'field1')) / 1000).toFixed(2);
+      const fdaal1 = ((total1 * getValue(data1, 'field3')) / 1000).toFixed(2);
+      const fsabji1 = ((total1 * getValue(data1, 'field5')) / 1000).toFixed(2);
+      const ftel1 = ((total1 * getValue(data1, 'field7')) / 1000).toFixed(2);
+      const fmasala1 = ((total1 * getValue(data1, 'field9')) / 1000).toFixed(2);
+      const fjalawan1 = ((total1 * getValue(data1, 'field11')) / 1000).toFixed(2);
 
-      const frice1 = ((total1 * parseFloat(data1.field1)) / 1000).toFixed(2);
-      const fdaal1 = ((total1 * parseFloat(data1.field3)) / 1000).toFixed(2);
-      const fsabji1 = ((total1 * parseFloat(data1.field5)) / 1000).toFixed(2);
-      const ftel1 = ((total1 * parseFloat(data1.field7)) / 1000).toFixed(2);
-      const fmasala1 = ((total1 * parseFloat(data1.field9)) / 1000).toFixed(2);
-      const fjalawan1 = ((total1 * parseFloat(data1.field11)) / 1000).toFixed(2);
+      const total = (
+        parseFloat(frice) + 
+        parseFloat(fdaal) + 
+        parseFloat(fsabji) + 
+        parseFloat(ftel) + 
+        parseFloat(fmasala) + 
+        parseFloat(fjalawan)
+      ).toFixed(2);
 
+      // Update the table
       const tableBody = document.getElementById("consumption-table").getElementsByTagName('tbody')[0];
       tableBody.innerHTML = `
         <tr><td>चावल</td><td>${frice1}</td><td>${frice}</td></tr>
