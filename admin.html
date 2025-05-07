@@ -5,109 +5,232 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MDM Pro Calculator App</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-  <script type="module" src="https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js"></script>
-  <script type="module" src="https://www.gstatic.com/firebasejs/11.6.1/firebase-database.js"></script>
   <style>
+    :root {
+      --primary-color: #d32f2f;
+      --primary-light: #ff6659;
+      --primary-dark: #9a0007;
+      --secondary-color: #f5f5f5;
+      --text-dark: #212121;
+      --text-light: #757575;
+    }
+
     body {
-      padding-top: 50px;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fafafa;
+      color: var(--text-dark);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .jumbotron {
+    .app-bar {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .app-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .main-content {
+      margin-top: 70px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    .app-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: transform 0.3s ease;
+    }
+
+    .app-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .app-heading {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 15px;
       text-align: center;
-      background-color: #FFFFFF;
     }
 
-    .jumbotron h3,
-    .jumbotron p {
-      color: #740000;
-    }
-
-    .btn-primary {
-      background-color: #740000;
-      border-color: #740000;
-    }
-
-    .btn-primary:hover,
-    .btn-primary:focus {
-      background-color: #5c0000;
-      border-color: #5c0000;
-    }
-
-    .footer {
+    .app-subheading {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 25px;
       text-align: center;
-      padding: 5px;
-      background-color: #740000;
-      margin-top: 20px;
-      color: #fff;
     }
 
-    .navbar-dark.bg-custom {
-      background-color: #740000;
+    .btn-modern {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 25px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
-    .table td,
-    .table th {
-      padding: 0.5rem;
-      font-size: 15px;
+    .btn-modern:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-modern:active {
+      transform: translateY(0);
+    }
+
+    .modern-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .modern-table thead {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .modern-table th {
+      padding: 12px 15px;
       text-align: center;
+      font-weight: 500;
+    }
+
+    .modern-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #f0f0f0;
+      text-align: center;
+    }
+
+    .modern-table tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .input-modern {
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      padding: 10px 15px;
+      transition: all 0.3s ease;
+      width: 100%;
+      text-align: center;
+    }
+
+    .input-modern:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+    }
+
+    .total-row {
+      font-weight: 600;
+      background-color: #f5f5f5;
     }
 
     #message {
       display: none;
-      color: green;
+      color: #388e3c;
       font-weight: bold;
       text-align: center;
-      margin-bottom: 20px;
+      margin: 20px 0;
+      padding: 15px;
+      background-color: #e8f5e9;
+      border-radius: 8px;
+    }
+
+    .app-footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.8rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .modern-table {
+        display: block;
+        overflow-x: auto;
+      }
     }
   </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-    <a class="navbar-brand" href="#">&#171; HOME</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-  </nav>
+  <!-- Modern App Bar -->
+  <div class="app-bar">
+    <h1 class="app-title">&#171; HOME</h1>
+  </div>
 
-  <div class="jumbotron jumbotron-fluid">
+  <!-- Main Content -->
+  <div class="main-content">
     <div class="container">
-      <h3 class="display-6"><b>मध्याहन भोजन योजना, बिहार पटना परिवर्तन मूल्य की नई दर की विवरणी... </b></h3>
-      <p class="lead"><b>Class I-V & VI-VIII</b></p>
+      <div class="app-card">
+        <h3 class="app-heading">मध्याहन भोजन योजना, बिहार पटना परिवर्तन मूल्य की नई दर की विवरणी...</h3>
+        <p class="app-subheading">Class I-V & VI-VIII</p>
+
+        <div id="message">Data updated successfully.</div>
+
+        <form onsubmit="event.preventDefault(); updateData();">
+          <table class="modern-table">
+            <thead>
+              <tr>
+                <th>सामग्री</th>
+                <th>वजन प्रति छात्र</th>
+                <th>दर प्रति किलो</th>
+                <th>मूल्य प्रति छात्र</th>
+              </tr>
+            </thead>
+            <tbody id="formFields">
+              <!-- Dynamically inserted rows -->
+            </tbody>
+            <tfoot>
+              <tr class="total-row">
+                <td colspan="2"></td>
+                <td>कुल</td>
+                <td id="totalCell">0</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div class="text-center mt-4">
+            <button type="submit" class="btn-modern">Update Record</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 
-  <div class="container">
-    <div id="message">Data updated successfully.</div>
-
-    <form onsubmit="event.preventDefault(); updateData();">
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>सामग्री</th>
-            <th>वजन प्रति छात्र</th>
-            <th>दर प्रति किलो</th>
-            <th>मूल्य प्रति छात्र</th>
-          </tr>
-        </thead>
-        <tbody id="formFields">
-          <!-- Dynamically inserted rows -->
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="2"></td>
-            <td>कुल</td>
-            <td id="totalCell">0</td>
-          </tr>
-        </tfoot>
-      </table>
-      <button type="submit" class="btn btn-primary">Update Record</button>
-    </form>
-  </div>
-
-  <footer class="footer">
+  <footer class="app-footer">
     <p>&copy; Dcs Technology. All Rights Reserved.</p>
   </footer>
 
@@ -145,9 +268,9 @@
 
         row.innerHTML = `
           <td>${items[i]}</td>
-          <td><input type="text" class="form-control" id="field${baseIndex}" value="${data["field" + baseIndex] || ""}"></td>
-          <td><input type="text" class="form-control" id="field${13 + i}" value="${data["field" + (13 + i)] || ""}"></td>
-          <td><input type="text" class="form-control" id="field${baseIndex + 1}" value="${data["field" + (baseIndex + 1)] || ""}"></td>
+          <td><input type="text" class="form-control input-modern" id="field${baseIndex}" value="${data["field" + baseIndex] || ""}"></td>
+          <td><input type="text" class="form-control input-modern" id="field${13 + i}" value="${data["field" + (13 + i)] || ""}"></td>
+          <td><input type="text" class="form-control input-modern" id="field${baseIndex + 1}" value="${data["field" + (baseIndex + 1)] || ""}"></td>
         `;
         tbody.appendChild(row);
       }
@@ -174,10 +297,17 @@
 
       try {
         await set(dataRef, fields);
-        document.getElementById("message").style.display = "block";
+        const message = document.getElementById("message");
+        message.style.display = "block";
+        message.textContent = "Data updated successfully!";
+        setTimeout(() => message.style.display = "none", 3000);
         updateTotal(fields);
       } catch (err) {
-        alert("Error updating data: " + err.message);
+        const message = document.getElementById("message");
+        message.style.display = "block";
+        message.style.color = "#d32f2f";
+        message.style.backgroundColor = "#ffebee";
+        message.textContent = "Error updating data: " + err.message;
       }
     };
 
