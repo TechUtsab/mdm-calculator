@@ -5,121 +5,290 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MDM Pro Calculator App</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material_Icons" rel="stylesheet">
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
+    :root {
+      --primary-color: #d32f2f;
+      --primary-light: #ff6659;
+      --primary-dark: #9a0007;
+      --secondary-color: #f5f5f5;
+      --text-dark: #212121;
+      --text-light: #757575;
+    }
+    
     body {
-      padding-top: 50px;
+      font-family: 'Poppins', sans-serif;
+      background-color: #fafafa;
+      color: var(--text-dark);
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
-    .navbar-dark.bg-custom {
-      background-color: #740000;
+    .app-bar {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .jumbotron {
-      background-color: #FFFFFF;
+    .app-title {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 0;
     }
 
-    .jumbotron h3,
-    .jumbotron p {
-      color: #740000;
+    .main-content {
+      margin-top: 70px;
+      padding: 20px;
+      flex: 1;
     }
 
-    .btn-primary {
-      background-color: #740000;
-      border-color: #740000;
+    .app-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+      padding: 25px;
+      margin-bottom: 25px;
+      transition: transform 0.3s ease;
     }
 
-    .footer {
+    .app-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .app-heading {
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 5px;
       text-align: center;
-      padding: 5px;
-      background-color: #740000;
-      margin-top: 320px;
-      color: #fff;
     }
 
-    .field-spacing {
-      padding-right: 50px;
+    .app-subheading {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+      text-align: center;
     }
-    
+
+    .btn-modern {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      width: 100%;
+    }
+
+    .btn-modern:hover {
+      background-color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+
+    .btn-modern:active {
+      transform: translateY(0);
+    }
+
+    .input-modern {
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+      padding: 12px 15px;
+      transition: all 0.3s ease;
+    }
+
+    .input-modern:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 8px;
+      padding: 15px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      flex: 1;
+      margin: 0 5px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: var(--primary-color);
+      font-size: 1.2rem;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-size: 0.8rem;
+    }
+
+    .modern-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .modern-table thead {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .modern-table th {
+      padding: 12px 15px;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .modern-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .modern-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .modern-table tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+
+    .total-row {
+      font-weight: 600;
+      background-color: #f5f5f5;
+    }
+
     #loading-message {
-      color: #740000;
+      color: var(--primary-color);
       font-weight: bold;
       text-align: center;
       margin: 20px 0;
+      padding: 15px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
     }
-    
+
     #error-message {
-      color: red;
+      color: #d32f2f;
       font-weight: bold;
       text-align: center;
       margin: 20px 0;
+      padding: 15px;
+      background-color: #ffebee;
+      border-radius: 8px;
+      display: none;
+    }
+
+    .app-footer {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.8rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 576px) {
+      .stats-container {
+        flex-direction: column;
+      }
+      
+      .stat-card {
+        margin: 5px 0;
+      }
     }
   </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-    <a class="navbar-brand" href="#">« HOME</a>
-  </nav>
-
-  <div class="container">
-    <div class="text-center"><br>
-      <h3> मध्याह्न भोजन व्यय विवरण </h3>
-      <h4>Class I-V</h4>
-    </div>
-    <br>
-    <table>
-      <tr>
-        <td class="field-spacing">
-          <div>
-            <b>
-              <p>छात्रों की कुल संख्या: <span id="total1">0</span></p>
-            </b>
-          </div>
-        </td>
-        <td>
-          <div>
-            <b>
-              <p>निर्धारित दर: <span id="dar">0.00</span></p>
-            </b>
-          </div>
-        </td>
-      </tr>
-    </table>
-
-    <div id="loading-message">Loading data from server...</div>
-    <div id="error-message" style="display: none;"></div>
-
-    <div class="input-group mb-3">
-      <input type="number" id="item1" class="form-control" placeholder="Enter number of students...">
-      <div class="input-group-append">
-        <button onclick="calculate()" class="btn btn-primary">Calculate</button>
-      </div>
-    </div>
-
-    <h4>Food Consumption:</h4>
-    <table id="consumption-table" class="table">
-      <thead>
-        <tr>
-          <th>सामान</th>
-          <th>मात्रा (Kg)</th>
-          <th>राशि</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td colspan="3" class="text-center">Enter number of students and click Calculate</td></tr>
-      </tbody>
-    </table>
+  <!-- Modern App Bar -->
+  <div class="app-bar">
+    <h1 class="app-title">« HOME</h1>
   </div>
 
-  <footer class="footer">
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <div class="app-card">
+        <h3 class="app-heading">मध्याह्न भोजन व्यय विवरण</h3>
+        <h4 class="app-subheading">Class I-V</h4>
+        
+        <div class="stats-container">
+          <div class="stat-card">
+            <div class="stat-value" id="total1">0</div>
+            <div class="stat-label">छात्रों की कुल संख्या</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="dar">0.00</div>
+            <div class="stat-label">निर्धारित दर (प्रति छात्र)</div>
+          </div>
+        </div>
+
+        <div id="loading-message">Loading data from server...</div>
+        <div id="error-message" style="display: none;"></div>
+
+        <div class="input-group mb-4">
+          <input type="number" id="item1" class="form-control input-modern" placeholder="Enter number of students...">
+          <div class="input-group-append">
+            <button class="btn btn-modern" id="calculate-btn">Calculate</button>
+          </div>
+        </div>
+
+        <h4 class="app-heading" style="text-align: left; margin-bottom: 15px;">Food Consumption:</h4>
+        <table id="consumption-table" class="modern-table">
+          <thead>
+            <tr>
+              <th>सामान</th>
+              <th>मात्रा (Kg)</th>
+              <th>राशि (₹)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="3" class="text-center">Enter number of students and click Calculate</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="app-footer">
     <p>© Dcs Technology. All Rights Reserved.</p>
   </footer>
 
-  <!-- Firebase and App Logic -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-  <script>
+  <!-- Firebase SDK and App Logic -->
+  <script type="module">
+    // Import Firebase modules
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js';
+    import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js';
+
     // Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAV5iLBDOc703K-r5rwrLGAQ2srlRVRV7g",
@@ -135,152 +304,209 @@
     // Initialize Firebase
     let db;
     try {
-      firebase.initializeApp(firebaseConfig);
-      db = firebase.database();
+      const app = initializeApp(firebaseConfig);
+      db = getDatabase(app);
       console.log("Firebase initialized successfully");
     } catch (error) {
       console.error("Firebase initialization failed:", error);
       showError("Failed to connect to database. Please refresh the page.");
     }
 
-    // Default values in case Firebase fails
+    // Default values (aligned with PHP/MySQL expected values)
     const defaultData = {
       fieldEven: {
-        field2: 4.62,  // Rice rate
-        field4: 2.31,  // Dal rate
-        field6: 1.54,  // Sabji rate
-        field8: 0.77,  // Tel rate
-        field10: 0.31, // Masala rate
-        field12: 0.77  // Jalawan rate
+        field2: 4.62,  // Rice rate (₹ per student)
+        field4: 2.31,  // Dal rate (₹ per student)
+        field6: 1.54,  // Sabji rate (₹ per student)
+        field8: 0.77,  // Tel rate (₹ per student)
+        field10: 0.31, // Masala rate (₹ per student)
+        field12: 0.77  // Jalawan rate (₹ per student)
       },
       fieldOdd: {
         field1: 100,   // Rice quantity (grams per student)
-        field3: 30,    // Dal quantity
-        field5: 75,    // Sabji quantity
-        field7: 7.5,   // Tel quantity
-        field9: 7.5,   // Masala quantity
-        field11: 50    // Jalawan quantity (grams)
+        field3: 30,    // Dal quantity (grams per student)
+        field5: 75,    // Sabji quantity (grams per student)
+        field7: 7.5,   // Tel quantity (grams per student)
+        field9: 7.5,   // Masala quantity (grams per student)
+        field11: 50    // Jalawan quantity (grams per student)
       }
     };
 
-    let data = {...defaultData.fieldEven};
-    let data1 = {...defaultData.fieldOdd};
+    let data = { ...defaultData.fieldEven };
+    let data1 = { ...defaultData.fieldOdd };
     let dataLoaded = false;
 
-    // Try to load data from Firebase
-    if (db) {
-      db.ref("admin1").once("value")
-        .then((snapshot) => {
+    // Fetch data from Firebase
+    async function fetchData() {
+      if (!db) {
+        document.getElementById("loading-message").style.display = "none";
+        showError("Database not connected. Using default values.");
+        updateRateDisplay();
+        return;
+      }
+
+      try {
+        const dbRef = ref(db, 'admin1');
+        const snapshot = await get(dbRef);
+        document.getElementById("loading-message").style.display = "none";
+
+        if (snapshot.exists()) {
           const val = snapshot.val();
-          document.getElementById("loading-message").style.display = "none";
-          
-          if (val) {
-            console.log("Data loaded from Firebase:", val);
-            
-            // Handle different possible data structures
-            if (val.fieldEven && val.fieldOdd) {
-              data = val.fieldEven;
-              data1 = val.fieldOdd;
-            } else if (val.fields) {
-              // Alternative structure if fields are direct children
-              data = val.fields.even || defaultData.fieldEven;
-              data1 = val.fields.odd || defaultData.fieldOdd;
-            } else {
-              // If data structure is completely different
-              console.warn("Unexpected data structure, using default values");
-              showError("Data format unexpected. Using default values.");
-            }
-            
-            dataLoaded = true;
-            updateRateDisplay();
+          console.log("Data loaded from Firebase:", val);
+
+          // Handle possible Firebase data structures
+          if (val.fieldEven && val.fieldOdd) {
+            data = { ...val.fieldEven };
+            data1 = { ...val.fieldOdd };
+          } else if (val.rates && val.quantities) {
+            data = { ...val.rates };
+            data1 = { ...val.quantities };
+          } else if (val.field1 && val.field2) {
+            // Flat structure
+            data = {
+              field2: val.field2,
+              field4: val.field4,
+              field6: val.field6,
+              field8: val.field8,
+              field10: val.field10,
+              field12: val.field12
+            };
+            data1 = {
+              field1: val.field1,
+              field3: val.field3,
+              field5: val.field5,
+              field7: val.field7,
+              field9: val.field9,
+              field11: val.field11
+            };
           } else {
-            console.warn("No data found at 'admin1', using default values");
-            showError("No data found. Using default values.");
+            console.warn("Unexpected data structure, using default values");
+            showError("Data format unexpected. Using default values.");
           }
-        })
-        .catch((error) => {
-          console.error("Firebase error:", error);
-          document.getElementById("loading-message").style.display = "none";
-          showError("Failed to load data. Using default values.");
-        });
-    } else {
-      document.getElementById("loading-message").style.display = "none";
-      showError("Database not connected. Using default values.");
+
+          dataLoaded = true;
+          updateRateDisplay();
+        } else {
+          console.warn("No data found at 'admin1', using default values");
+          showError("No data found in database. Using default values.");
+          updateRateDisplay();
+        }
+      } catch (error) {
+        console.error("Firebase fetch error:", error);
+        document.getElementById("loading-message").style.display = "none";
+        showError("Failed to load data from server. Using default values.");
+        updateRateDisplay();
+      }
     }
+
+    // Call fetchData on page load
+    fetchData();
 
     function showError(message) {
       const errorEl = document.getElementById("error-message");
       errorEl.textContent = message;
       errorEl.style.display = "block";
-      setTimeout(() => errorEl.style.display = "none", 5000);
+      setTimeout(() => {
+        errorEl.style.display = "none";
+      }, 5000);
     }
 
     function updateRateDisplay() {
-      const fields = ['field2', 'field4', 'field6', 'field8', 'field10', 'field12'];
-      let dar = 0;
-      for (const field of fields) {
-        dar += parseFloat(data[field] || 0);
-      }
-      document.getElementById("dar").textContent = dar.toFixed(2);
+      // Calculate the total rate per student (matches PHP $dar)
+      const dar = (
+        parseFloat(data['field2'] || 0) +
+        parseFloat(data['field4'] || 0) +
+        parseFloat(data['field6'] || 0) +
+        parseFloat(data['field8'] || 0) +
+        parseFloat(data['field10'] || 0) +
+        parseFloat(data['field12'] || 0)
+      ).toFixed(2);
+
+      document.getElementById("dar").textContent = dar;
     }
 
     function calculate() {
       const item1Input = document.getElementById("item1").value;
-      const item1Quantity = parseInt(item1Input);
+      const totalStudents = parseInt(item1Input);
 
-      // Validate input
-      if (isNaN(item1Quantity) || item1Quantity <= 0) {
+      // Validate input (matches PHP)
+      if (isNaN(totalStudents) || totalStudents <= 0) {
         showError("Please enter a valid number of students.");
         return;
       }
 
-      const total1 = item1Quantity;
-      
-      // Helper function to safely get values
-      const getValue = (obj, field, defaultValue = 0) => {
-        const val = parseFloat(obj[field]);
-        return isNaN(val) ? defaultValue : val;
-      };
+      // Calculate amounts (₹) - matches PHP logic
+      const frice = (totalStudents * parseFloat(data['field2'] || 0)).toFixed(2);
+      const fdaal = (totalStudents * parseFloat(data['field4'] || 0)).toFixed(2);
+      const fsabji = (totalStudents * parseFloat(data['field6'] || 0)).toFixed(2);
+      const ftel = (totalStudents * parseFloat(data['field8'] || 0)).toFixed(2);
+      const fmasala = (totalStudents * parseFloat(data['field10'] || 0)).toFixed(2);
+      const fjalawan = (totalStudents * parseFloat(data['field12'] || 0)).toFixed(2);
 
-      // Calculate amounts
-      const frice = (total1 * getValue(data, 'field2')).toFixed(2);
-      const fdaal = (total1 * getValue(data, 'field4')).toFixed(2);
-      const fsabji = (total1 * getValue(data, 'field6')).toFixed(2);
-      const ftel = (total1 * getValue(data, 'field8')).toFixed(2);
-      const fmasala = (total1 * getValue(data, 'field10')).toFixed(2);
-      const fjalawan = (total1 * getValue(data, 'field12')).toFixed(2);
-      
-      // Calculate quantities (convert grams to kg)
-      const frice1 = ((total1 * getValue(data1, 'field1')) / 1000).toFixed(2);
-      const fdaal1 = ((total1 * getValue(data1, 'field3')) / 1000).toFixed(2);
-      const fsabji1 = ((total1 * getValue(data1, 'field5')) / 1000).toFixed(2);
-      const ftel1 = ((total1 * getValue(data1, 'field7')) / 1000).toFixed(2);
-      const fmasala1 = ((total1 * getValue(data1, 'field9')) / 1000).toFixed(2);
-      const fjalawan1 = ((total1 * getValue(data1, 'field11')) / 1000).toFixed(2);
+      // Calculate quantities (kg) - matches PHP logic
+      const frice1 = ((totalStudents * parseFloat(data1['field1'] || 0)) / 1000).toFixed(2);
+      const fdaal1 = ((totalStudents * parseFloat(data1['field3'] || 0)) / 1000).toFixed(2);
+      const fsabji1 = ((totalStudents * parseFloat(data1['field5'] || 0)) / 1000).toFixed(2);
+      const ftel1 = ((totalStudents * parseFloat(data1['field7'] || 0)) / 1000).toFixed(2);
+      const fmasala1 = ((totalStudents * parseFloat(data1['field9'] || 0)) / 1000).toFixed(2);
+      const fjalawan1 = ((totalStudents * parseFloat(data1['field11'] || 0)) / 1000).toFixed(2);
 
+      // Calculate total amount - matches PHP logic
       const total = (
-        parseFloat(frice) + 
-        parseFloat(fdaal) + 
-        parseFloat(fsabji) + 
-        parseFloat(ftel) + 
-        parseFloat(fmasala) + 
+        parseFloat(frice) +
+        parseFloat(fdaal) +
+        parseFloat(fsabji) +
+        parseFloat(ftel) +
+        parseFloat(fmasala) +
         parseFloat(fjalawan)
       ).toFixed(2);
 
-      // Update the table
+      // Update the table - matches PHP table structure
       const tableBody = document.getElementById("consumption-table").getElementsByTagName('tbody')[0];
       tableBody.innerHTML = `
-        <tr><td>चावल</td><td>${frice1}</td><td>${frice}</td></tr>
-        <tr><td>दाल</td><td>${fdaal1}</td><td>${fdaal}</td></tr>
-        <tr><td>सब्जी</td><td>${fsabji1}</td><td>${fsabji}</td></tr>
-        <tr><td>तेल</td><td>${ftel1}</td><td>${ftel}</td></tr>
-        <tr><td>मसाला/नमक</td><td>${fmasala1}</td><td>${fmasala}</td></tr>
-        <tr><td>जलावन</td><td>${fjalawan1}</td><td>${fjalawan}</td></tr>
-        <tr><td></td><td><b>कुल</b></td><td><b>${total}</b></td></tr>`;
+        <tr>
+          <td>चावल</td>
+          <td>${frice1}</td>
+          <td>${frice}</td>
+        </tr>
+        <tr>
+          <td>दाल</td>
+          <td>${fdaal1}</td>
+          <td>${fdaal}</td>
+        </tr>
+        <tr>
+          <td>सब्जी</td>
+          <td>${fsabji1}</td>
+          <td>${fsabji}</td>
+        </tr>
+        <tr>
+          <td>तेल</td>
+          <td>${ftel1}</td>
+          <td>${ftel}</td>
+        </tr>
+        <tr>
+          <td>मसाला/नमक</td>
+          <td>${fmasala1}</td>
+          <td>${fmasala}</td>
+        </tr>
+        <tr>
+          <td>जलावन</td>
+          <td>${fjalawan1}</td>
+          <td>${fjalawan}</td>
+        </tr>
+        <tr class="total-row">
+          <td></td>
+          <td><b>कुल</b></td>
+          <td><b>${total}</b></td>
+        </tr>
+      `;
 
-      document.getElementById("total1").textContent = total1;
+      // Update total students display
+      document.getElementById("total1").textContent = totalStudents;
     }
+
+    // Add event listener for calculate button
+    document.getElementById("calculate-btn").addEventListener("click", calculate);
   </script>
 </body>
-
 </html>
