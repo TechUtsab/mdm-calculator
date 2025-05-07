@@ -4,139 +4,192 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MDM Pro Calculator App</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
-   
     <style>
-        body {
-            padding-top: 50px; /* Reduced space to 20px */
+        :root {
+            --primary-color: #d32f2f;
+            --primary-light: #ff6659;
+            --primary-dark: #9a0007;
+            --secondary-color: #f5f5f5;
+            --text-dark: #212121;
+            --text-light: #757575;
         }
-
-        .jumbotron {
         
-    		padding: 0rem 1rem;
-    		margin-bottom: 2rem;
-            text-align: center;
-            background-color: #FFFFFF;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fafafa;
+            color: var(--text-dark);
+            padding: 0;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        .jumbotron h3,
-        .jumbotron p {
-            color: #740000;
-        }
-
-        .btn-wide {
-            width: 100%;
-            text-decoration: none;
-        }
-
-        .navbar-dark .navbar-brand,
-        .navbar-dark .navbar-nav .nav-link {
-            color: #fff;
-        }
-
-        .navbar-dark.bg-custom {
-            background-color: #740000;
-        }
-
-        .navbar-dark.bg-custom .navbar-nav .nav-link:hover,
-        .navbar-dark.bg-custom .navbar-nav .nav-link:focus {
-            color: #740000;
-            background-color: #fff;
-        }
-
-        .btn-primary {
-            background-color: #740000;
-            border-color: #740000;
-        }
-
-        .btn-primary:hover,
-        .btn-primary:focus {
-            background-color: #740000;
-            border-color: #740000;
-        }
-
-        .footer {
-            background-color: #740000;
-            padding: 5px 0;
-            text-align: center;
+        .app-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: fixed;
-            bottom: 0;
             width: 100%;
-            color: #fff;
-        }
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .logo {
+        .app-title {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .app-menu {
+            display: flex;
+            gap: 15px;
+        }
+
+        .app-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .main-content {
+            margin-top: 70px;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 25px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .app-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border: 3px solid white;
+            background: white;
+        }
+
+        .app-heading {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .app-subheading {
+            color: var(--text-light);
+            font-size: 0.9rem;
             margin-bottom: 20px;
         }
 
-        .logo img {
-            max-width: 200px;
+        .btn-modern {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 0;
+            font-size: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
-        .login-container {
-            max-width: 400px;
-            margin: 0 auto;
+        .btn-modern:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .btn-modern:active {
+            transform: translateY(0);
+        }
+
+        .btn-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .app-footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 12px;
+            font-size: 0.8rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 576px) {
+            .btn-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .app-logo {
+                width: 100px;
+                height: 100px;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-custom fixed-top">
-        <a class="navbar-brand" href="index.php">MDM Pro Calculator</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="admin.php">Administrator</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Help</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-<br><br><br>
-    <div class="jumbotron jumbotron-fluid text-center">
-    <div class="logo mb-4">
-        <img src="logo.jpg" alt="Logo" class="img-fluid" style="max-width: 150px;">
-    </div>
-    <div class="container">
-        <h2 class="display-6 font-weight-bold">मध्याहन भोजन योजना, पटना, बिहार</h2>
-        <h4 class="display-6 font-weight-bold">Mid Day Meal Scheme</h4>
-        <p class="lead font-weight-bold">Class I-V & VI-VIII</p>
-    </div>
-</div>
-
-<!-- Login Form -->
-<div class="container login-container">
-    <div class="row">
-        <!-- Button for Class I-V -->
-        <div class="col-6 mb-4">
-            <a href="home.html" class="btn btn-primary btn-lg w-100">Class I-V</a>
-        </div>
-        <!-- Button for Class VI-VIII -->
-        <div class="col-6 mb-4">
-            <a href="home.html" class="btn btn-primary btn-lg w-100">Class VI-VIII</a>
+    <!-- Modern App Bar -->
+    <div class="app-bar">
+        <h1 class="app-title">MDM Pro Calculator</h1>
+        <div class="app-menu">
+            <a href="admin.php"><i class="material-icons">admin_panel_settings</i></a>
+            <a href="#"><i class="material-icons">contact_support</i></a>
+            <a href="#"><i class="material-icons">help_outline</i></a>
         </div>
     </div>
-</div>
 
-
-
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; Dcs Technology. All Rights Reserved.</p>
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="app-card">
+            <img src="logo.jpg" alt="Logo" class="app-logo">
+            <h2 class="app-heading">मध्याहन भोजन योजना, पटना, बिहार</h2>
+            <h3 class="app-heading">Mid Day Meal Scheme</h3>
+            <p class="app-subheading">Class I-V & VI-VIII</p>
+            
+            <div class="btn-container">
+                <a href="home.html" class="btn btn-modern">Class I-V</a>
+                <a href="home.html" class="btn btn-modern">Class VI-VIII</a>
+            </div>
         </div>
-    </footer>
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>&copy; Dcs Technology. All Rights Reserved.</p>
     </footer>
 
     <!-- Bootstrap JS -->
