@@ -52,18 +52,30 @@
       height: 56px;
     }
 
-    .app-title {
-      font-size: 1.3rem;
-      font-weight: 500;
-      margin: 0;
-    }
-
     .settings-icon {
       color: white;
       text-decoration: none;
       font-size: 1.5rem;
       display: flex;
       align-items: center;
+    }
+
+    .back-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white background */
+      border-radius: 50%; /* Round shape */
+      transition: background-color 0.3s ease;
+    }
+
+    .back-icon:hover {
+      background-color: rgba(255, 255, 255, 0.3); /* Slightly lighter on hover */
     }
 
     .main-content {
@@ -208,7 +220,7 @@
 
     .total-row {
       font-weight: 600;
-      background      background-color: #f5f5f5;
+      background-color: #f5f5f5;
     }
 
     #loading-message {
@@ -313,7 +325,9 @@
 <body>
   <!-- Modern App Bar -->
   <div class="app-bar">
-    <h1 class="app-title">« HOME</h1>
+    <a href="#" class="back-icon">
+      <i class="material-icons">arrow_back</i>
+    </a>
     <a href="admin.html" class="settings-icon">
       <i class="material-icons">settings</i>
     </a>
@@ -482,7 +496,7 @@
       }
     }
 
-    // Call fetchData on page load
+    // call fetchData on page load
     fetchData();
 
     function showError(message) {
