@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>MDM Pro Calculator App</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
   <style>
     :root {
       --primary-color: #d32f2f;
@@ -19,6 +16,11 @@
       --secondary-color: #f5f5f5;
       --text-dark: #212121;
       --text-light: #757575;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -30,59 +32,63 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      font-size: 14px;
+      line-height: 1.4;
     }
 
     .app-bar {
       background-color: var(--primary-color);
       color: white;
-      padding: 15px 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 12px 16px;
       position: fixed;
       width: 100%;
       top: 0;
       z-index: 1000;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      height: 56px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .app-title {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 500;
       margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .main-content {
-      margin-top: 70px;
-      padding: 20px;
+      margin-top: 56px;
+      padding: 16px;
       flex: 1;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     .app-card {
       background: white;
       border-radius: 12px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      padding: 25px;
-      margin-bottom: 25px;
-      transition: transform 0.3s ease;
-    }
-
-    .app-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      padding: 16px;
+      margin-bottom: 16px;
+      width: 100%;
     }
 
     .app-heading {
       color: var(--primary-color);
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 12px;
       text-align: center;
+      font-size: 1.1rem;
     }
 
     .app-subheading {
       color: var(--text-light);
-      font-size: 0.9rem;
-      margin-bottom: 25px;
+      font-size: 0.8rem;
+      margin-bottom: 16px;
       text-align: center;
     }
 
@@ -91,65 +97,56 @@
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 12px 25px;
-      font-size: 1rem;
+      padding: 12px 24px;
+      font-size: 0.9rem;
       font-weight: 500;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .btn-modern:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    }
-
-    .btn-modern:active {
-      transform: translateY(0);
-    }
-
-    .modern-table {
       width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      max-width: 200px;
+      margin: 0 auto;
+      display: block;
+      cursor: pointer;
     }
 
-    .modern-table thead {
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      font-size: 0.85rem;
+    }
+
+    .data-table thead {
       background-color: var(--primary-color);
       color: white;
     }
 
-    .modern-table th {
-      padding: 12px 15px;
+    .data-table th {
+      padding: 10px 8px;
       text-align: center;
       font-weight: 500;
     }
 
-    .modern-table td {
-      padding: 12px 15px;
+    .data-table td {
+      padding: 10px 8px;
       border-bottom: 1px solid #f0f0f0;
       text-align: center;
     }
 
-    .modern-table tbody tr:hover {
-      background-color: #f9f9f9;
+    .data-table tbody tr:last-child td {
+      border-bottom: none;
     }
 
-    .input-modern {
-      border-radius: 8px;
-      border: 1px solid #e0e0e0;
-      padding: 10px 15px;
-      transition: all 0.3s ease;
+    .input-mobile {
       width: 100%;
+      padding: 8px;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
       text-align: center;
+      font-size: 0.85rem;
     }
 
-    .input-modern:focus {
+    .input-mobile:focus {
+      outline: none;
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
     }
 
     .total-row {
@@ -162,53 +159,75 @@
       color: #388e3c;
       font-weight: bold;
       text-align: center;
-      margin: 20px 0;
-      padding: 15px;
+      margin: 12px 0;
+      padding: 10px;
       background-color: #e8f5e9;
-      border-radius: 8px;
+      border-radius: 6px;
+      font-size: 0.85rem;
     }
 
     .app-footer {
       background-color: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 12px;
-      font-size: 0.8rem;
+      padding: 10px;
+      font-size: 0.7rem;
       margin-top: auto;
     }
 
-    @media (max-width: 768px) {
-      .modern-table {
-        display: block;
-        overflow-x: auto;
+    .form-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin-bottom: 16px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        font-size: 16px;
+      }
+      
+      .main-content {
+        padding: 20px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .data-table {
+        font-size: 0.9rem;
+      }
+      
+      .input-mobile {
+        font-size: 0.9rem;
+        padding: 10px;
       }
     }
   </style>
 </head>
 
 <body>
-  <!-- Modern App Bar -->
+  <!-- Mobile App Bar -->
   <div class="app-bar">
     <h1 class="app-title">&#171; HOME</h1>
   </div>
 
   <!-- Main Content -->
   <div class="main-content">
-    <div class="container">
-      <div class="app-card">
-        <h3 class="app-heading">मध्याहन भोजन योजना, बिहार पटना परिवर्तन मूल्य की नई दर की विवरणी...</h3>
-        <p class="app-subheading">Class I-V & VI-VIII</p>
+    <div class="app-card">
+      <h3 class="app-heading">मध्याहन भोजन योजना, बिहार पटना</h3>
+      <p class="app-subheading">परिवर्तन मूल्य की नई दर की विवरणी</p>
 
-        <div id="message">Data updated successfully.</div>
+      <div id="message">Data updated successfully.</div>
 
-        <form onsubmit="event.preventDefault(); updateData();">
-          <table class="modern-table">
+      <form onsubmit="event.preventDefault(); updateData();">
+        <div class="form-container">
+          <table class="data-table">
             <thead>
               <tr>
                 <th>सामग्री</th>
-                <th>वजन प्रति छात्र</th>
-                <th>दर प्रति किलो</th>
-                <th>मूल्य प्रति छात्र</th>
+                <th>वजन</th>
+                <th>दर</th>
+                <th>मूल्य</th>
               </tr>
             </thead>
             <tbody id="formFields">
@@ -222,11 +241,9 @@
               </tr>
             </tfoot>
           </table>
-          <div class="text-center mt-4">
-            <button type="submit" class="btn-modern">Update Record</button>
-          </div>
-        </form>
-      </div>
+        </div>
+        <button type="submit" class="btn-modern">Update Record</button>
+      </form>
     </div>
   </div>
 
@@ -268,9 +285,9 @@
 
         row.innerHTML = `
           <td>${items[i]}</td>
-          <td><input type="text" class="form-control input-modern" id="field${baseIndex}" value="${data["field" + baseIndex] || ""}"></td>
-          <td><input type="text" class="form-control input-modern" id="field${13 + i}" value="${data["field" + (13 + i)] || ""}"></td>
-          <td><input type="text" class="form-control input-modern" id="field${baseIndex + 1}" value="${data["field" + (baseIndex + 1)] || ""}"></td>
+          <td><input type="text" class="input-mobile" id="field${baseIndex}" value="${data["field" + baseIndex] || ""}" inputmode="decimal"></td>
+          <td><input type="text" class="input-mobile" id="field${13 + i}" value="${data["field" + (13 + i)] || ""}" inputmode="decimal"></td>
+          <td><input type="text" class="input-mobile" id="field${baseIndex + 1}" value="${data["field" + (baseIndex + 1)] || ""}" inputmode="decimal"></td>
         `;
         tbody.appendChild(row);
       }
@@ -323,5 +340,4 @@
     fetchData();
   </script>
 </body>
-
 </html>
