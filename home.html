@@ -8,7 +8,7 @@
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material_Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
@@ -30,14 +30,14 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      font-size: 13px; /* Increased base font size for readability */
-      line-height: 1.4;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .app-bar {
       background-color: var(--primary-color);
       color: white;
-      padding: 12px 16px; /* Slightly increased padding */
+      padding: 14px 18px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       position: fixed;
       width: 100%;
@@ -46,48 +46,60 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 52px; /* Slightly increased height */
+      height: 56px;
     }
 
     .app-title {
-      font-size: 1.1rem; /* Slightly larger title */
+      font-size: 1.2rem;
       font-weight: 500;
       margin: 0;
     }
 
+    .settings-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .settings-icon:hover {
+      opacity: 0.9;
+    }
+
     .main-content {
-      margin-top: 52px; /* Adjusted for app-bar */
-      padding: 16px; /* Increased padding */
+      margin-top: 56px;
+      padding: 18px;
       flex: 1;
       overflow-x: hidden;
     }
 
     .app-card {
       background: white;
-      border-radius: 10px; /* Slightly larger radius */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      padding: 16px; /* Increased padding */
-      margin-bottom: 16px; /* Increased margin */
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 18px;
+      margin-bottom: 18px;
       transition: transform 0.3s ease;
     }
 
     .app-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
     .app-heading {
       color: var(--primary-color);
       font-weight: 600;
-      margin-bottom: 6px; /* Slightly increased margin */
+      margin-bottom: 8px;
       text-align: center;
-      font-size: 1.1rem; /* Slightly larger heading */
+      font-size: 1.3rem;
     }
 
     .app-subheading {
       color: var(--text-light);
-      font-size: 0.8rem; /* Slightly larger subheading */
-      margin-bottom: 10px; /* Slightly increased margin */
+      font-size: 0.95rem;
+      margin-bottom: 12px;
       text-align: center;
     }
 
@@ -95,19 +107,19 @@
       background-color: var(--primary-color);
       color: white;
       border: none;
-      border-radius: 6px;
-      padding: 10px 0; /* Increased padding */
-      font-size: 0.9rem; /* Slightly larger text */
+      border-radius: 8px;
+      padding: 12px 0;
+      font-size: 1rem;
       font-weight: 500;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       width: 100%;
     }
 
     .btn-modern:hover {
       background-color: var(--primary-dark);
       transform: translateY(-1px);
-      box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
     .btn-modern:active {
@@ -115,53 +127,58 @@
     }
 
     .input-modern {
-      border-radius: 6px;
+      border-radius: 8px;
       border: 1px solid #e0e0e0;
-      padding: 8px 12px; /* Increased padding */
+      padding: 10px 14px;
       transition: all 0.3s ease;
-      font-size: 0.85rem; /* Slightly larger text */
+      font-size: 1rem;
     }
 
     .input-modern:focus {
       border-color: var(--primary-color);
-      box-shadow: 0 0 0 2px rgba(211, 47, 47, 0.2);
+      box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.2);
     }
 
     .stats-container {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 16px; /* Increased margin */
+      margin-bottom: 18px;
     }
 
     .stat-card {
       background: white;
-      border-radius: 8px; /* Slightly larger radius */
-      padding: 10px; /* Increased padding */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       flex: 1;
-      margin: 0 6px; /* Increased margin */
+      margin: 0 4px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      min-height: 80px;
     }
 
     .stat-value {
       font-weight: 600;
       color: var(--primary-color);
-      font-size: 1.1rem; /* Slightly larger value */
+      font-size: 1.3rem;
+      margin-bottom: 4px;
     }
 
     .stat-label {
       color: var(--text-light);
-      font-size: 0.7rem; /* Slightly larger label */
+      font-size: 0.75rem;
+      line-height: 1.2;
     }
 
     .modern-table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      border-radius: 8px; /* Slightly larger radius */
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      font-size: 0.8rem; /* Slightly larger table text */
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      font-size: 0.95rem;
     }
 
     .modern-table thead {
@@ -170,15 +187,17 @@
     }
 
     .modern-table th {
-      padding: 8px 10px; /* Increased padding */
+      padding: 12px 14px;
       text-align: left;
       font-weight: 500;
       white-space: nowrap;
+      font-size: 1rem;
     }
 
     .modern-table td {
-      padding: 8px 10px; /* Increased padding */
+      padding: 12px 14px;
       border-bottom: 1px solid #f0f0f0;
+      font-size: 0.95rem;
     }
 
     .modern-table tr:last-child td {
@@ -198,39 +217,39 @@
       color: var(--primary-color);
       font-weight: bold;
       text-align: center;
-      margin: 16px 0; /* Increased margin */
-      padding: 10px; /* Increased padding */
+      margin: 18px 0;
+      padding: 12px;
       background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 6px;
-      font-size: 0.8rem; /* Slightly larger text */
+      border-radius: 8px;
+      font-size: 0.95rem;
     }
 
     #error-message {
       color: #d32f2f;
       font-weight: bold;
       text-align: center;
-      margin: 16px 0; /* Increased margin */
-      padding: 10px; /* Increased padding */
+      margin: 18px 0;
+      padding: 12px;
       background-color: #ffebee;
-      border-radius: 6px;
+      border-radius: 8px;
       display: none;
-      font-size: 0.8rem; /* Slightly larger text */
+      font-size: 0.95rem;
     }
 
     .app-footer {
       background-color: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 10px; /* Increased padding */
-      font-size: 0.7rem; /* Slightly larger footer text */
+      padding: 12px;
+      font-size: 0.85rem;
       margin-top: auto;
     }
 
     /* Table Column Widths */
     .modern-table th:nth-child(1),
     .modern-table td:nth-child(1) {
-      min-width: 70px; /* Slightly wider Item column */
-      max-width: 90px;
+      min-width: 90px;
+      max-width: 120px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -240,81 +259,97 @@
     .modern-table td:nth-child(2),
     .modern-table th:nth-child(3),
     .modern-table td:nth-child(3) {
-      min-width: 60px; /* Slightly wider Quantity and Amount columns */
-      max-width: 80px;
+      min-width: 80px;
+      max-width: 100px;
     }
 
     @media (max-width: 576px) {
       .stats-container {
-        flex-direction: column;
+        flex-direction: row; /* Changed to row for mobile */
+        flex-wrap: wrap;
       }
 
       .stat-card {
-        margin: 6px 0; /* Increased margin */
+        flex: 1 0 calc(50% - 8px); /* Two cards per row */
+        margin: 4px;
+        min-height: auto;
+        padding: 8px;
+      }
+
+      .stat-value {
+        font-size: 1.1rem;
+      }
+
+      .stat-label {
+        font-size: 0.65rem;
       }
 
       .main-content {
-        padding: 12px; /* Slightly reduced for small screens */
+        padding: 14px;
       }
 
       .app-card {
-        padding: 12px; /* Slightly reduced */
+        padding: 14px;
       }
 
       .modern-table th,
       .modern-table td {
-        padding: 6px 8px; /* Slightly reduced for small screens */
+        padding: 10px 12px;
       }
 
       .modern-table th:nth-child(1),
       .modern-table td:nth-child(1) {
-        min-width: 60px; /* Adjusted for small screens */
-        max-width: 80px;
+        min-width: 80px;
+        max-width: 100px;
       }
 
       .modern-table th:nth-child(2),
       .modern-table td:nth-child(2),
       .modern-table th:nth-child(3),
       .modern-table td:nth-child(3) {
-        min-width: 50px; /* Adjusted for small screens */
-        max-width: 70px;
+        min-width: 70px;
+        max-width: 90px;
       }
     }
 
     @media (min-width: 768px) {
       body {
-        font-size: 15px; /* Larger for desktop */
+        font-size: 16px;
       }
 
       .main-content {
-        padding: 20px;
+        padding: 24px;
       }
 
       .app-card {
-        padding: 20px;
+        padding: 24px;
       }
 
       .modern-table {
-        font-size: 0.9rem; /* Larger table text */
+        font-size: 1.1rem;
+      }
+
+      .modern-table th {
+        font-size: 1.1rem;
       }
 
       .modern-table th:nth-child(1),
       .modern-table td:nth-child(1) {
-        min-width: 110px;
-        max-width: 130px;
+        min-width: 130px;
+        max-width: 160px;
       }
 
       .modern-table th:nth-child(2),
       .modern-table td:nth-child(2),
       .modern-table th:nth-child(3),
       .modern-table td:nth-child(3) {
-        min-width: 90px;
-        max-width: 110px;
+        min-width: 110px;
+        max-width: 140px;
       }
 
       .input-modern {
-        font-size: 0.9rem;
-        padding: 10px 14px;
+        font-size: 1.1rem;
+        padding: 12px 16px;
       }
     }
   </style>
@@ -324,6 +359,9 @@
   <!-- Modern App Bar -->
   <div class="app-bar">
     <h1 class="app-title">« HOME</h1>
+    <a href="admin.html" class="settings-icon">
+      <i class="material-icons">settings</i>
+    </a>
   </div>
 
   <!-- Main Content -->
@@ -354,7 +392,7 @@
           </div>
         </div>
 
-        <h4 class="app-heading" style="text-align: left; margin-bottom: 12px;">Food Consumption:</h4>
+        <h4 class="app-heading" style="text-align: left; margin-bottom: 14px;">Food Consumption:</h4>
         <table id="consumption-table" class="modern-table">
           <thead>
             <tr>
