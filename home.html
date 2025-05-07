@@ -111,19 +111,26 @@
       color: white;
       border: none;
       border-radius: 8px;
-      padding: 14px 0;
+      padding: 14px 16px;
       font-size: 1.1rem;
       font-weight: 500;
-      width: 100%;
-      margin-top: 8px;
+      white-space: nowrap;
+      margin-left: 8px;
+      min-width: 100px;
     }
 
     .input-modern {
       border-radius: 8px;
       border: 1px solid #e0e0e0;
       padding: 14px 16px;
-      width: 100%;
       font-size: 1.1rem;
+      flex: 1;
+    }
+
+    .input-row {
+      display: flex;
+      width: 100%;
+      margin-bottom: 16px;
     }
 
     .stats-container {
@@ -233,12 +240,6 @@
       margin-top: auto;
     }
 
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-    }
-
     @media (max-width: 576px) {
       .modern-table th,
       .modern-table td {
@@ -261,6 +262,12 @@
       
       .stat-label {
         font-size: 0.7rem;
+      }
+      
+      .btn-modern {
+        padding: 14px 12px;
+        min-width: 80px;
+        font-size: 1rem;
       }
     }
 
@@ -321,7 +328,7 @@
         <div id="loading-message">Loading data from server...</div>
         <div id="error-message" style="display: none;"></div>
 
-        <div class="input-group">
+        <div class="input-row">
           <input type="number" id="item1" class="input-modern" placeholder="Enter number of students..." inputmode="numeric">
           <button class="btn btn-modern" id="calculate-btn">Calculate</button>
         </div>
