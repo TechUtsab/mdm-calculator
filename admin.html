@@ -32,36 +32,45 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      font-size: 12px; /* Reduced base font size */
-      line-height: 1.3;
+      font-size: 12px; /* Exact size from provided code */
+      line-height: 1.3; /* Exact size from provided code */
     }
 
     .app-bar {
       background-color: var(--primary-color);
       color: white;
-      padding: 10px 12px;
+      padding: 10px 12px; /* Exact padding from provided code */
       position: fixed;
-      width: 100敦
+      width: 100%; /* Fixed typo from 100敦 */
       top: 0;
       z-index: 1000;
       display: flex;
       align-items: center;
-      height: 48px; /* Reduced height */
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      height: 48px; /* Exact height from provided code */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Exact shadow from provided code */
     }
 
-    .app-title {
-      font-size: 1rem; /* Smaller title */
-      font-weight: 500;
-      margin: 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .back-icon {
+      color: white;
+      text-decoration: none;
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-icon:hover {
+      background-color: rgba(255, 255, 255, 0.3);
     }
 
     .main-content {
-      margin-top: 48px; /* Adjusted for smaller app-bar */
-      padding: 12px;
+      margin-top: 48px; /* Exact margin to match app-bar height */
+      padding: 12px; /* Exact padding from provided code */
       flex: 1;
       width: 100%;
       max-width: 100%;
@@ -70,25 +79,25 @@
 
     .app-card {
       background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      padding: 12px;
-      margin-bottom: 12px;
+      border-radius: 8px; /* Exact radius from provided code */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Exact shadow from provided code */
+      padding: 12px; /* Exact padding from provided code */
+      margin-bottom: 12px; /* Exact margin from provided code */
       width: 100%;
     }
 
     .app-heading {
       color: var(--primary-color);
       font-weight: 600;
-      margin-bottom: 8px;
+      margin-bottom: 8px; /* Exact margin from provided code */
       text-align: center;
-      font-size: 1rem; /* Smaller heading */
+      font-size: 1rem; /* Exact size from provided code */
     }
 
     .app-subheading {
       color: var(--text-light);
-      font-size: 0.7rem; /* Smaller subheading */
-      margin-bottom: 12px;
+      font-size: 0.7rem; /* Exact size from provided code */
+      margin-bottom: 12px; /* Exact margin from provided code */
       text-align: center;
     }
 
@@ -96,12 +105,12 @@
       background-color: var(--primary-color);
       color: white;
       border: none;
-      border-radius: 6px;
-      padding: 10px 20px;
-      font-size: 0.8rem; /* Smaller button text */
+      border-radius: 6px; /* Exact radius from provided code */
+      padding: 10px 20px; /* Exact padding from provided code */
+      font-size: 0.8rem; /* Exact size from provided code */
       font-weight: 500;
       width: 100%;
-      max-width: 160px; /* Reduced max-width */
+      max-width: 160px; /* Exact max-width from provided code */
       margin: 0 auto;
       display: block;
       cursor: pointer;
@@ -110,8 +119,8 @@
     .data-table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 12px;
-      font-size: 0.75rem; /* Smaller table text */
+      margin-bottom: 12px; /* Exact margin from provided code */
+      font-size: 0.75rem; /* Exact size from provided code */
     }
 
     .data-table thead {
@@ -120,14 +129,14 @@
     }
 
     .data-table th {
-      padding: 6px 4px; /* Reduced padding */
+      padding: 6px 4px; /* Exact padding from provided code */
       text-align: center;
       font-weight: 500;
       white-space: nowrap;
     }
 
     .data-table td {
-      padding: 6px 4px; /* Reduced padding */
+      padding: 6px 4px; /* Exact padding from provided code */
       border-bottom: 1px solid #f0f0f0;
       text-align: center;
     }
@@ -138,11 +147,11 @@
 
     .input-mobile {
       width: 100%;
-      padding: 6px; /* Reduced padding */
+      padding: 6px; /* Exact padding from provided code */
       border: 1px solid #e0e0e0;
-      border-radius: 4px;
+      border-radius: 4px; /* Exact radius from provided code */
       text-align: center;
-      font-size: 0.75rem; /* Smaller input text */
+      font-size: 0.75rem; /* Exact size from provided code */
     }
 
     .input-mobile:focus {
@@ -160,31 +169,31 @@
       color: #388e3c;
       font-weight: bold;
       text-align: center;
-      margin: 8px 0;
-      padding: 8px;
+      margin: 8px 0; /* Exact margin from provided code */
+      padding: 8px; /* Exact padding from provided code */
       background-color: #e8f5e9;
-      border-radius: 4px;
-      font-size: 0.75rem; /* Smaller message text */
+      border-radius: 4px; /* Exact radius from provided code */
+      font-size: 0.75rem; /* Exact size from provided code */
     }
 
     .app-footer {
       background-color: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 8px;
-      font-size: 0.65rem; /* Smaller footer text */
+      padding: 8px; /* Exact padding from provided code */
+      font-size: 0.65rem; /* Exact size from provided code */
       margin-top: auto;
     }
 
     .form-container {
-      overflow-x: hidden; /* Prevent horizontal scrolling */
-      margin-bottom: 12px;
+      overflow-x: hidden;
+      margin-bottom: 12px; /* Exact margin from provided code */
     }
 
     /* Responsive Table Adjustments */
     .data-table th:nth-child(1),
     .data-table td:nth-child(1) {
-      min-width: 60px; /* Item column */
+      min-width: 60px;
       max-width: 80px;
       white-space: nowrap;
       overflow: hidden;
@@ -197,29 +206,29 @@
     .data-table td:nth-child(3),
     .data-table th:nth-child(4),
     .data-table td:nth-child(4) {
-      min-width: 50px; /* Weight, Rate, Value columns */
+      min-width: 50px;
       max-width: 70px;
     }
 
     @media (min-width: 768px) {
       body {
-        font-size: 14px; /* Slightly larger for desktop */
+        font-size: 14px; /* Exact size from provided code */
       }
       
       .main-content {
-        padding: 16px;
-        max-width: 800px;
+        padding: 16px; /* Exact padding from provided code */
+        max-width: 800px; /* Exact max-width from provided code */
         margin-left: auto;
         margin-right: auto;
       }
       
       .data-table {
-        font-size: 0.85rem;
+        font-size: 0.85rem; /* Exact size from provided code */
       }
       
       .input-mobile {
-        font-size: 0.85rem;
-        padding: 8px;
+        font-size: 0.85rem; /* Exact size from provided code */
+        padding: 8px; /* Exact padding from provided code */
       }
 
       .data-table th:nth-child(1),
@@ -244,7 +253,9 @@
 <body>
   <!-- Mobile App Bar -->
   <div class="app-bar">
-    <h1 class="app-title">« HOME</h1>
+    <a href="#" class="back-icon">
+      <i class="material-icons">arrow_back</i>
+    </a>
   </div>
 
   <!-- Main Content -->
