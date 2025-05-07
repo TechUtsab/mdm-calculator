@@ -30,14 +30,14 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      font-size: 12px; /* Reduced base font size */
-      line-height: 1.3;
+      font-size: 13px; /* Increased base font size for readability */
+      line-height: 1.4;
     }
 
     .app-bar {
       background-color: var(--primary-color);
       color: white;
-      padding: 10px 12px; /* Reduced padding */
+      padding: 12px 16px; /* Slightly increased padding */
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
       position: fixed;
       width: 100%;
@@ -46,48 +46,48 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 48px; /* Reduced height */
+      height: 52px; /* Slightly increased height */
     }
 
     .app-title {
-      font-size: 1rem; /* Smaller title */
+      font-size: 1.1rem; /* Slightly larger title */
       font-weight: 500;
       margin: 0;
     }
 
     .main-content {
-      margin-top: 48px; /* Adjusted for smaller app-bar */
-      padding: 12px; /* Reduced padding */
+      margin-top: 52px; /* Adjusted for app-bar */
+      padding: 16px; /* Increased padding */
       flex: 1;
       overflow-x: hidden;
     }
 
     .app-card {
       background: white;
-      border-radius: 8px; /* Smaller radius */
+      border-radius: 10px; /* Slightly larger radius */
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      padding: 12px; /* Reduced padding */
-      margin-bottom: 12px; /* Reduced margin */
+      padding: 16px; /* Increased padding */
+      margin-bottom: 16px; /* Increased margin */
       transition: transform 0.3s ease;
     }
 
     .app-card:hover {
-      transform: translateY(-3px); /* Reduced hover effect */
+      transform: translateY(-3px);
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
     .app-heading {
       color: var(--primary-color);
       font-weight: 600;
-      margin-bottom: 4px; /* Reduced margin */
+      margin-bottom: 6px; /* Slightly increased margin */
       text-align: center;
-      font-size: 1rem; /* Smaller heading */
+      font-size: 1.1rem; /* Slightly larger heading */
     }
 
     .app-subheading {
       color: var(--text-light);
-      font-size: 0.7rem; /* Smaller subheading */
-      margin-bottom: 8px; /* Reduced margin */
+      font-size: 0.8rem; /* Slightly larger subheading */
+      margin-bottom: 10px; /* Slightly increased margin */
       text-align: center;
     }
 
@@ -95,9 +95,9 @@
       background-color: var(--primary-color);
       color: white;
       border: none;
-      border-radius: 6px; /* Smaller radius */
-      padding: 8px 0; /* Reduced padding */
-      font-size: 0.8rem; /* Smaller text */
+      border-radius: 6px;
+      padding: 10px 0; /* Increased padding */
+      font-size: 0.9rem; /* Slightly larger text */
       font-weight: 500;
       transition: all 0.3s ease;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -106,7 +106,7 @@
 
     .btn-modern:hover {
       background-color: var(--primary-dark);
-      transform: translateY(-1px); /* Reduced hover effect */
+      transform: translateY(-1px);
       box-shadow: 0 3px 6px rgba(0,0,0,0.15);
     }
 
@@ -115,11 +115,11 @@
     }
 
     .input-modern {
-      border-radius: 6px; /* Smaller radius */
+      border-radius: 6px;
       border: 1px solid #e0e0e0;
-      padding: 6px 10px; /* Reduced padding */
+      padding: 8px 12px; /* Increased padding */
       transition: all 0.3s ease;
-      font-size: 0.75rem; /* Smaller text */
+      font-size: 0.85rem; /* Slightly larger text */
     }
 
     .input-modern:focus {
@@ -130,38 +130,38 @@
     .stats-container {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 12px; /* Reduced margin */
+      margin-bottom: 16px; /* Increased margin */
     }
 
     .stat-card {
       background: white;
-      border-radius: 6px; /* Smaller radius */
-      padding: 8px; /* Reduced padding */
+      border-radius: 8px; /* Slightly larger radius */
+      padding: 10px; /* Increased padding */
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       flex: 1;
-      margin: 0 4px; /* Reduced margin */
+      margin: 0 6px; /* Increased margin */
       text-align: center;
     }
 
     .stat-value {
       font-weight: 600;
       color: var(--primary-color);
-      font-size: 1rem; /* Smaller value */
+      font-size: 1.1rem; /* Slightly larger value */
     }
 
     .stat-label {
       color: var(--text-light);
-      font-size: 0.65rem; /* Smaller label */
+      font-size: 0.7rem; /* Slightly larger label */
     }
 
     .modern-table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      border-radius: 6px; /* Smaller radius */
+      border-radius: 8px; /* Slightly larger radius */
       overflow: hidden;
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-      font-size: 0.75rem; /* Smaller table text */
+      font-size: 0.8rem; /* Slightly larger table text */
     }
 
     .modern-table thead {
@@ -170,14 +170,14 @@
     }
 
     .modern-table th {
-      padding: 6px 8px; /* Reduced padding */
+      padding: 8px 10px; /* Increased padding */
       text-align: left;
       font-weight: 500;
       white-space: nowrap;
     }
 
     .modern-table td {
-      padding: 6px 8px; /* Reduced padding */
+      padding: 8px 10px; /* Increased padding */
       border-bottom: 1px solid #f0f0f0;
     }
 
@@ -198,39 +198,39 @@
       color: var(--primary-color);
       font-weight: bold;
       text-align: center;
-      margin: 12px 0; /* Reduced margin */
-      padding: 8px; /* Reduced padding */
+      margin: 16px 0; /* Increased margin */
+      padding: 10px; /* Increased padding */
       background-color: rgba(255, 255, 255, 0.8);
       border-radius: 6px;
-      font-size: 0.75rem; /* Smaller text */
+      font-size: 0.8rem; /* Slightly larger text */
     }
 
     #error-message {
       color: #d32f2f;
       font-weight: bold;
       text-align: center;
-      margin: 12px 0; /* Reduced margin */
-      padding: 8px; /* Reduced padding */
+      margin: 16px 0; /* Increased margin */
+      padding: 10px; /* Increased padding */
       background-color: #ffebee;
       border-radius: 6px;
       display: none;
-      font-size: 0.75rem; /* Smaller text */
+      font-size: 0.8rem; /* Slightly larger text */
     }
 
     .app-footer {
       background-color: var(--primary-color);
       color: white;
       text-align: center;
-      padding: 8px; /* Reduced padding */
-      font-size: 0.65rem; /* Smaller footer text */
+      padding: 10px; /* Increased padding */
+      font-size: 0.7rem; /* Slightly larger footer text */
       margin-top: auto;
     }
 
     /* Table Column Widths */
     .modern-table th:nth-child(1),
     .modern-table td:nth-child(1) {
-      min-width: 60px; /* Item column */
-      max-width: 80px;
+      min-width: 70px; /* Slightly wider Item column */
+      max-width: 90px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -240,8 +240,8 @@
     .modern-table td:nth-child(2),
     .modern-table th:nth-child(3),
     .modern-table td:nth-child(3) {
-      min-width: 50px; /* Quantity and Amount columns */
-      max-width: 70px;
+      min-width: 60px; /* Slightly wider Quantity and Amount columns */
+      max-width: 80px;
     }
 
     @media (max-width: 576px) {
@@ -250,57 +250,71 @@
       }
 
       .stat-card {
-        margin: 4px 0; /* Reduced margin */
+        margin: 6px 0; /* Increased margin */
       }
 
       .main-content {
-        padding: 8px; /* Further reduced for small screens */
+        padding: 12px; /* Slightly reduced for small screens */
       }
 
       .app-card {
-        padding: 8px; /* Further reduced */
+        padding: 12px; /* Slightly reduced */
       }
 
       .modern-table th,
       .modern-table td {
-        padding: 4px 6px; /* Further reduced for small screens */
-      }
-    }
-
-    @media (min-width: 768px) {
-      body {
-        font-size: 14px; /* Slightly larger for desktop */
-      }
-
-      .main-content {
-        padding: 16px;
-      }
-
-      .app-card {
-        padding: 16px;
-      }
-
-      .modern-table {
-        font-size: 0.85rem;
+        padding: 6px 8px; /* Slightly reduced for small screens */
       }
 
       .modern-table th:nth-child(1),
       .modern-table td:nth-child(1) {
-        min-width: 100px;
-        max-width: 120px;
+        min-width: 60px; /* Adjusted for small screens */
+        max-width: 80px;
       }
 
       .modern-table th:nth-child(2),
       .modern-table td:nth-child(2),
       .modern-table th:nth-child(3),
       .modern-table td:nth-child(3) {
-        min-width: 80px;
-        max-width: 100px;
+        min-width: 50px; /* Adjusted for small screens */
+        max-width: 70px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        font-size: 15px; /* Larger for desktop */
+      }
+
+      .main-content {
+        padding: 20px;
+      }
+
+      .app-card {
+        padding: 20px;
+      }
+
+      .modern-table {
+        font-size: 0.9rem; /* Larger table text */
+      }
+
+      .modern-table th:nth-child(1),
+      .modern-table td:nth-child(1) {
+        min-width: 110px;
+        max-width: 130px;
+      }
+
+      .modern-table th:nth-child(2),
+      .modern-table td:nth-child(2),
+      .modern-table th:nth-child(3),
+      .modern-table td:nth-child(3) {
+        min-width: 90px;
+        max-width: 110px;
       }
 
       .input-modern {
-        font-size: 0.85rem;
-        padding: 8px 12px;
+        font-size: 0.9rem;
+        padding: 10px 14px;
       }
     }
   </style>
@@ -333,14 +347,14 @@
         <div id="loading-message">Loading data from server...</div>
         <div id="error-message" style="display: none;"></div>
 
-        <div class="input-group mb-3"> <!-- Reduced margin -->
+        <div class="input-group mb-3">
           <input type="number" id="item1" class="form-control input-modern" placeholder="Enter number of students..." inputmode="numeric">
           <div class="input-group-append">
             <button class="btn btn-modern" id="calculate-btn">Calculate</button>
           </div>
         </div>
 
-        <h4 class="app-heading" style="text-align: left; margin-bottom: 10px;">Food Consumption:</h4>
+        <h4 class="app-heading" style="text-align: left; margin-bottom: 12px;">Food Consumption:</h4>
         <table id="consumption-table" class="modern-table">
           <thead>
             <tr>
