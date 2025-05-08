@@ -112,12 +112,12 @@
       cursor: pointer;
     }
 
-    /* TABLE SPECIFIC STYLES WITH INCREASED SIZE */
+    /* Optimized Table Styles */
     .data-table {
       width: 100%;
       border-collapse: collapse;
       margin-bottom: 16px;
-      font-size: 1rem; /* Increased table font size */
+      font-size: 0.95rem;
       table-layout: fixed;
     }
 
@@ -127,41 +127,41 @@
     }
 
     .data-table th {
-      padding: 12px 8px; /* Increased padding */
+      padding: 10px 6px;
       text-align: center;
       font-weight: 500;
       white-space: normal;
       word-break: break-word;
-      font-size: 1.1rem; /* Increased header size */
+      font-size: 1.05rem;
     }
 
     .data-table td {
-      padding: 12px 8px; /* Increased padding */
+      padding: 10px 6px;
       border-bottom: 1px solid #f0f0f0;
       text-align: center;
       word-break: break-word;
-      font-size: 1rem; /* Explicitly set cell font size */
+      font-size: 0.95rem;
     }
 
     .input-mobile {
       width: 100%;
-      padding: 10px; /* Increased input padding */
+      padding: 8px;
       border: 1px solid #e0e0e0;
       border-radius: 4px;
       text-align: center;
-      font-size: 1rem; /* Increased input font size */
+      font-size: 0.95rem;
     }
 
     .total-row {
       font-weight: 600;
       background-color: #f5f5f5;
-      font-size: 1.1rem; /* Increased total row size */
+      font-size: 1.05rem;
     }
 
     /* Column width adjustments */
     .data-table th:nth-child(1),
     .data-table td:nth-child(1) {
-      width: 35%; /* Slightly wider first column */
+      width: 35%;
     }
 
     .data-table th:nth-child(2),
@@ -170,7 +170,7 @@
     .data-table td:nth-child(3),
     .data-table th:nth-child(4),
     .data-table td:nth-child(4) {
-      width: 20%; /* Slightly narrower value columns */
+      width: 20%;
     }
 
     #message {
@@ -202,30 +202,30 @@
 
     @media (min-width: 768px) {
       .data-table {
-        font-size: 1.1rem; /* Larger font for tablets */
+        font-size: 1rem;
       }
       
       .data-table th {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
       
       .input-mobile {
-        font-size: 1.1rem;
-        padding: 12px;
+        font-size: 1rem;
+        padding: 10px;
       }
 
       .total-row {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
       }
     }
 
     @media (max-width: 480px) {
       .data-table {
-        font-size: 0.95rem; /* Slightly smaller for very small screens */
+        font-size: 0.9rem;
       }
       
       .input-mobile {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
     }
   </style>
