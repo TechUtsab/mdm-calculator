@@ -263,5 +263,13 @@
         // Initial check
         window.addEventListener('load', updateOnlineStatus);
     </script>
+    <script>
+  const isWebView = /wv/.test(navigator.userAgent.toLowerCase());
+
+  if (isWebView && !window.location.search.includes('v=')) {
+    const url = window.location.origin + window.location.pathname + '?v=' + new Date().getTime();
+    window.location.replace(url);
+  }
+    </script>
 </body>
 </html>
