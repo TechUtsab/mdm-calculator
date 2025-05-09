@@ -54,7 +54,7 @@
     .app-title {
       font-size: 1.1rem;
       font-weight: bold;
-      margin: 0 16px 0 12px; /* Small margin for tight spacing */
+      margin: 0 16px 0 12px;
     }
 
     .settings-icon {
@@ -63,7 +63,7 @@
       font-size: 1.5rem;
       display: flex;
       align-items: center;
-      margin-left: auto; /* Push settings icon to the right */
+      margin-left: auto;
     }
 
     .back-icon {
@@ -220,7 +220,6 @@
       border-bottom: none;
     }
 
-    /* Zebra stripes for 1st, 3rd, and 5th rows */
     .modern-table tbody tr:nth-child(1),
     .modern-table tbody tr:nth-child(3),
     .modern-table tbody tr:nth-child(5) {
@@ -561,12 +560,24 @@
       const fmasala = (totalStudents * parseFloat(data['field10'] || 0)).toFixed(2);
       const fjalawan = (totalStudents * parseFloat(data['field12'] || 0)).toFixed(2);
 
-      const frice1 = ((totalStudents * parseFloat(data1['field1'] || 0)) / 1000).toFixed(2);
-      const fdaal1 = ((totalStudents * parseFloat(data1['field3'] || 0)) / 1000).toFixed(2);
-      const fsabji1 = ((totalStudents * parseFloat(data1['field5'] || 0)) / 1000).toFixed(2);
-      const ftel1 = ((totalStudents * parseFloat(data1['field7'] || 0)) / 1000).toFixed(2);
-      const fmasala1 = ((totalStudents * parseFloat(data1['field9'] || 0)) / 1000).toFixed(2);
-      const fjalawan1 = ((totalStudents * parseFloat(data1['field11'] || 0)) / 1000).toFixed(2);
+      // Improved function to format quantity without any trailing zeros
+      const formatQuantity = (value) => {
+        const num = (totalStudents * parseFloat(value || 0)) / 1000;
+        // Convert to string and remove trailing zeros and possible decimal point
+        const str = num.toString();
+        // Handle cases where number is in scientific notation
+        if (str.indexOf('e') !== -1) {
+          return parseFloat(str).toFixed(10).replace(/(\.0+|(?<=\.\d+)0+)$/, '');
+        }
+        return str.replace(/(\.0+|(?<=\.\d+)0+)$/, '');
+      };
+
+      const frice1 = formatQuantity(data1['field1']);
+      const fdaal1 = formatQuantity(data1['field3']);
+      const fsabji1 = formatQuantity(data1['field5']);
+      const ftel1 = formatQuantity(data1['field7']);
+      const fmasala1 = formatQuantity(data1['field9']);
+      const fjalawan1 = formatQuantity(data1['field11']);
 
       const total = (
         parseFloat(frice) +
